@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/classify_images.py
 #                                                                             
-# PROGRAMMER: 
-# DATE CREATED:                                 
+# PROGRAMMER: Nikolas Pattakos
+# DATE CREATED: 15/03/2022
 # REVISED DATE: 
 # PURPOSE: Create a function classify_images that uses the classifier function 
 #          to create the classifier labels and then compares the classifier 
@@ -11,10 +11,10 @@
 #            -The Image Folder as image_dir within classify_images and function 
 #             and as in_arg.dir for function call within main. 
 #            -The results dictionary as results_dic within classify_images 
-#             function and results for the functin call within main.
+#             function and results for the function call within main.
 #            -The CNN model architecture as model within classify_images function
 #             and in_arg.arch for the function call within main. 
-#           This function uses the extend function to add items to the list 
+#           This function uses the extend function to add items to the list
 #           that's the 'value' of the results dictionary. You will be adding the
 #           classifier label as the item at index 1 of the list and the comparison 
 #           of the pet and classifier labels as the item at index 2 of the list.
@@ -65,4 +65,19 @@ def classify_images(images_dir, results_dic, model):
      Returns:
            None - results_dic is mutable data type so no return needed.         
     """
-    None 
+    for file in results_dic:
+        test_file = str(images_dir) + str(file)
+        #print("filename:", test_file, "full path:", test_file, "dictionary entry:", results_dic[file])
+        test_file_classification = classifier(test_file, model)
+        result_lower = test_file_classification.lower()
+        result = result_lower.strip()
+        #print("\nResults from test_classifier.py\nImage:", test_file,
+        #      "using model:", model, "was classified as a:", result,
+        #      "we know it is a:", results_dic[file][0])
+        results_dic[file].append(result)
+        if results_dic[file][0] in result:
+            results_dic[file].append(1)
+        else:
+            results_dic[file].append(0)
+       # print(results_dic[file])
+    return results_dic

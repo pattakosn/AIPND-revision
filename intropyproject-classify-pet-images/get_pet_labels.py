@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/get_pet_labels.py
 #                                                                             
-# PROGRAMMER: 
-# DATE CREATED:                                  
+# PROGRAMMER: N. Pattakos
+# DATE CREATED: 15/02/2022
 # REVISED DATE: 
 # PURPOSE: Create the function get_pet_labels that creates the pet labels from 
 #          the image's filename. This function inputs: 
@@ -19,10 +19,14 @@
 # Imports python modules
 from os import listdir
 
+
 # TODO 2: Define get_pet_labels function below please be certain to replace None
 #       in the return statement with results_dic dictionary that you create 
 #       with this function
-# 
+#
+from typing import Union, List
+
+
 def get_pet_labels(image_dir):
     """
     Creates a dictionary of pet labels (results_dic) based upon the filenames 
@@ -40,6 +44,27 @@ def get_pet_labels(image_dir):
       List. The list contains for following item:
          index 0 = pet image label (string)
     """
+    results_dic = dict()
+
+    filename_list = listdir(image_dir)
+    #for idx in range(0, 10, 1):
+    #    print("{:2d} file: {:>25}".format(idx + 1, filename_list[idx]))
+
+    for filename in filename_list:
+        lower_name = filename.lower()
+        spaces_list_lower_name = lower_name.split("_")
+        pet_name = ""
+        for i in spaces_list_lower_name:
+            if i.isalpha():
+                pet_name += i + " "
+        pet_name = pet_name.strip()
+        ####print("\nFilename='",filename,"' label='",pet_name,"'")
+        if filename not in results_dic:
+            results_dic[filename] = [pet_name]
+            #print("Adding key=", filename," in results_dic with value =", results_dic[filename])
+        else:
+            print("** Warning: Key=", filename,
+                  " already exists in results_dic with value =", results_dic[filename])
     # Replace None with the results_dic dictionary that you created with this
     # function
-    return None
+    return results_dic
