@@ -67,11 +67,11 @@ def classify_images(images_dir, results_dic, model):
     """
     for file in results_dic:
         test_file = str(images_dir) + str(file)
-        #print("filename:", test_file, "full path:", test_file, "dictionary entry:", results_dic[file])
+        # print("filename:", test_file, "full path:", test_file, "dictionary entry:", results_dic[file])
         test_file_classification = classifier(test_file, model)
         result_lower = test_file_classification.lower()
         result = result_lower.strip()
-        #print("\nResults from test_classifier.py\nImage:", test_file,
+        # print("\nResults from test_classifier.py\nImage:", test_file,
         #      "using model:", model, "was classified as a:", result,
         #      "we know it is a:", results_dic[file][0])
         results_dic[file].append(result)

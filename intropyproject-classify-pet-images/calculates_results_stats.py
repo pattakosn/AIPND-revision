@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/calculates_results_stats.py
 #                                                                             
-# PROGRAMMER:
-# DATE CREATED:                                  
-# REVISED DATE: 
+# PROGRAMMER: Nikolas Pattakos
+# DATE CREATED: 15/03/2022
+# REVISED DATE: 20/03/2022
 # PURPOSE: Create a function calculates_results_stats that calculates the 
-#          statistics of the results of the programrun using the classifier's model 
+#          statistics of the results of the program run using the classifier's model
 #          architecture to classify the images. This function will use the 
 #          results in the results dictionary to calculate these statistics. 
 #          This function will then put the results statistics in a dictionary
@@ -67,7 +67,54 @@ def calculates_results_stats(results_dic):
                      and the value is the statistic's value. See comments above
                      and the classroom Item XX Calculating Results for details
                      on how to calculate the counts and statistics.
-    """        
-    # Replace None with the results_stats_dic dictionary that you created with 
-    # this function 
-    return None
+    """
+    # for result in results_dic:
+    #    print(result, "(key): [0]: ", results_dic[result][0], " [1]: ", results_dic[result][1], " (",
+    #          results_dic[result][2], ", ", results_dic[result][3], ", ", results_dic[result][4], ")")
+
+    Z = len(results_dic)
+    A = 0
+    B = 0
+    C = 0
+    E = 0
+    Y = 0
+    for res in results_dic:
+        if results_dic[res][3] == 1:
+            B += 1
+        if results_dic[res][3] == 1 and results_dic[res][4] == 1:
+            A += 1
+        if results_dic[res][3] == 0 and results_dic[res][4] == 0:
+            C += 1
+        if results_dic[res][3] == 1 and results_dic[res][2] == 1:
+            E += 1
+        if results_dic[res][2] == 1:
+            Y += 1
+    D = Z - B
+
+    results_stats_dic = dict()
+    results_stats_dic["n_images"] = Z
+    results_stats_dic["n_dogs_img"] = B
+    results_stats_dic["n_notdogs_img"] = results_stats_dic["n_images"] - B
+    results_stats_dic["n_match"] = Y
+    results_stats_dic["n_correct_dogs"] = A
+    results_stats_dic["n_correct_notdogs"] = C
+    results_stats_dic["n_correct_breed"] = E
+    if Z == 0:
+        results_stats_dic["pct_match"] = 0
+    else:
+        results_stats_dic["pct_match"] = Y / Z * 100
+    if B == 0 :
+        results_stats_dic["pct_correct_dogs"] = 0
+        results_stats_dic["pct_correct_breed"] = 0
+    else:
+        results_stats_dic["pct_correct_dogs"] = A / B * 100
+        results_stats_dic["pct_correct_breed"] = E / B * 100
+    if D == 0 :
+        results_stats_dic["pct_correct_notdogs"] = 0
+    else :
+        results_stats_dic["pct_correct_notdogs"] = C / D * 100
+    # for result in results_stats_dic:
+    #    print(result, " = ", results_stats_dic[result])
+
+    # Replace None with the results_stats_dic dictionary that you created with this function
+    return results_stats_dic

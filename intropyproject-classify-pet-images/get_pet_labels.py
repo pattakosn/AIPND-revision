@@ -47,7 +47,7 @@ def get_pet_labels(image_dir):
     results_dic = dict()
 
     filename_list = listdir(image_dir)
-    #for idx in range(0, 10, 1):
+    # for idx in range(0, 10, 1):
     #    print("{:2d} file: {:>25}".format(idx + 1, filename_list[idx]))
 
     for filename in filename_list:
@@ -58,10 +58,10 @@ def get_pet_labels(image_dir):
             if i.isalpha():
                 pet_name += i + " "
         pet_name = pet_name.strip()
-        ####print("\nFilename='",filename,"' label='",pet_name,"'")
+        #### print("\nFilename='",filename,"' label='",pet_name,"'")
         if filename not in results_dic:
             results_dic[filename] = [pet_name]
-            #print("Adding key=", filename," in results_dic with value =", results_dic[filename])
+            # print("Adding key=", filename," in results_dic with value =", results_dic[filename])
         else:
             print("** Warning: Key=", filename,
                   " already exists in results_dic with value =", results_dic[filename])
