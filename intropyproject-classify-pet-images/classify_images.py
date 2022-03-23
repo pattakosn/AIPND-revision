@@ -74,10 +74,12 @@ def classify_images(images_dir, results_dic, model):
         # print("\nResults from test_classifier.py\nImage:", test_file,
         #      "using model:", model, "was classified as a:", result,
         #      "we know it is a:", results_dic[file][0])
-        results_dic[file].append(result)
+        # results_dic[file].append(result)
         if results_dic[file][0] in result:
-            results_dic[file].append(1)
+            results_dic[file].extend((result,1))
+            # results_dic[file].append(1)
         else:
-            results_dic[file].append(0)
+            results_dic[file].extend((result,0))
+            # results_dic[file].append(0)
        # print(results_dic[file])
     return results_dic

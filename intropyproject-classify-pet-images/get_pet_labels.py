@@ -51,6 +51,8 @@ def get_pet_labels(image_dir):
     #    print("{:2d} file: {:>25}".format(idx + 1, filename_list[idx]))
 
     for filename in filename_list:
+        if filename.startswith('.'):
+            continue
         lower_name = filename.lower()
         spaces_list_lower_name = lower_name.split("_")
         pet_name = ""

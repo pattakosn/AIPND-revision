@@ -45,6 +45,7 @@ def get_input_args():
     parser.add_argument('--dir', type=str, default='pet_images/', help='folder containing pet images to classify')
     parser.add_argument('--arch',
                         type=str,
+                        choices=['vgg', 'resnet', 'alexnet'],
                         default='vgg',
                         help='CNN model architecture, available options: resnet, alexnet,  vgg')
     parser.add_argument('--dogfile', type=str, default='dognames.txt', help='list of known dog names')
